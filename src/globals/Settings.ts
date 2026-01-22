@@ -16,14 +16,12 @@ export const Settings: GlobalConfig = {
             {
               name: 'siteTitle',
               type: 'text',
-              localized: true,
               label: 'Site Title',
               defaultValue: 'Frank Nav Portfolio',
             },
             {
               name: 'description',
               type: 'textarea',
-              localized: true,
               label: 'Site Description',
               defaultValue: 'UX/UI Designer & Junior FullStack Developer',
             },
@@ -42,7 +40,6 @@ export const Settings: GlobalConfig = {
                 {
                   name: 'label',
                   type: 'text',
-                  localized: true,
                   label: 'Label',
                   required: true,
                 },

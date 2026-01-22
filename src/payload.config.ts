@@ -11,6 +11,7 @@ import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
+import { Settings } from './globals/Settings' // Note: Settings is a global that will be used to store site setting labels for localization
 
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
@@ -64,7 +65,11 @@ export default buildConfig({
       connectionString: process.env.POSTGRES_URL || '',
     },
   }),
-
+  localization: {
+    locales: ['en', 'es'],
+    defaultLocale: 'en',
+    fallback: true,
+  },
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   plugins: [
@@ -76,7 +81,7 @@ export default buildConfig({
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
     }),
   ],
-  globals: [Header, Footer],
+  globals: [Header, Footer, Settings],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {
