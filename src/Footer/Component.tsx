@@ -8,8 +8,8 @@ import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
 
-export async function Footer() {
-  const footerData: Footer = await getCachedGlobal('footer', 1)()
+export async function Footer({ locale }: { locale?: 'en' | 'es' }) {
+  const footerData: Footer = (await getCachedGlobal('footer', 1, locale)()) as Footer
 
   const navItems = footerData?.navItems || []
 
