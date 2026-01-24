@@ -1,5 +1,14 @@
 # Portfolio v2 Roadmap & Checklist
 
+> [!IMPORTANT]
+> **CURRENT ACTIVE PHASE: 🧪 PHASE 1-4 (EXPERIMENTAL)**
+>
+> - **Mode**: `push: true` (Auto-Synced)
+> - **Database**: Development Sandbox
+> - **Goal**: Rapid Prototyping & UI Design
+
+---
+
 Use this checklist to track the project's progress. Items marked with `[x]` are complete.
 
 ### **Summary of the New Plan**
@@ -51,9 +60,25 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 - [ ] Implement contact forms & lead management
 - [ ] **Frontend Localization**: Implement the user-facing language toggle
 
+---
+
+## 🛑 PHASE TRANSITION GATE (DO NOT SKIP)
+
+_This section must be completed BEFORE moving to Phase 5: Testing & Launch._
+
+- [ ] Create a fresh, empty Production Database in Neon.
+- [ ] Set `push: false` in `payload.config.ts`.
+- [ ] Run `pnpm payload migrate:create --name initial_production_schema` to lock the UI structure.
+- [ ] Connect Vercel to the Production Database URL.
+
+---
+
 ## Phase 5: Testing & Launch
 
 - [ ] Cross-browser & Mobile responsiveness audit
 - [ ] SEO setup (Meta tags, OpenGraph, Sitemap)
 - [ ] Configure functional production email (Gmail/SMTP)
+- [ ] Finalized Migration: Disable `push` & Generate production schema
+- [ ] Connect custom domain `franknav.com`
+- [ ] Update `NEXT_PUBLIC_SERVER_URL` to `https://franknav.com`
 - [ ] DNS Cutover & Final Production Launch
