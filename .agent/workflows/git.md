@@ -7,7 +7,19 @@ Follow this workflow for every change to ensure stability and easy reversibility
 ### 1. Branching Strategy
 
 - **Base Branch**: ALWAYS branch from `main`.
-- **Naming Convention**: `feature/[short-description]` or `fix/[bug-description]`.
+- **Base Branch**: ALWAYS branch from `main`.
+- **Branch Prefixes**:
+  - `feature/`: New functionality (e.g., `feature/add-contact-form`)
+  - `bugfix/`: Non-critical fixes (e.g., `bugfix/fix-header-padding`)
+  - `hotfix/`: Critical production fixes (branched from `main`)
+  - `release/`: Preparing for production (e.g., `release/v2.0.0`)
+  - `docs/`: Documentation updates
+  - `chore/`: Maintenance (e.g., `chore/update-deps`)
+  - `refactor/`: Code structural changes
+  - `test/`: Adding or modifying tests
+- **Naming Rules**:
+  - Use `kebab-case` (lowercase with hyphens).
+  - Keep names descriptive but concise.
 - **Command**: `git checkout -b feature/my-new-feature`
 
 ### 2. Atomic Commits
