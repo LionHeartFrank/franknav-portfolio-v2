@@ -44,4 +44,5 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 
 - [ ] Cross-browser & Mobile responsiveness audit
 - [ ] SEO setup (Meta tags, OpenGraph, Sitemap)
+- [ ] Configure functional production email (Gmail/SMTP)
 - [ ] DNS Cutover & Final Production Launch
