@@ -117,6 +117,21 @@ export const Pages: CollectionConfig<'pages'> = {
         position: 'sidebar',
       },
     },
+    {
+      name: 'parent',
+      type: 'relationship',
+      admin: {
+        position: 'sidebar',
+      },
+      filterOptions: ({ id }) => {
+        return {
+          id: {
+            not_equals: id,
+          },
+        }
+      },
+      relationTo: 'pages',
+    },
     slugField(),
   ],
   hooks: {
