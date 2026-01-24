@@ -61,6 +61,15 @@ export default buildConfig({
   },
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
+  // TODO Change push to false in Phase 5
+  /*
+    =========================================================
+    PHASE STATUS: EXPERIMENTAL (Phases 1-4)
+    - push: true is enabled for rapid local iteration.
+    - DO NOT use this mode with real production data.
+    - Transition to push: false in Phase 5.
+    =========================================================
+  */
   db: vercelPostgresAdapter({
     push: true,
     pool: {
