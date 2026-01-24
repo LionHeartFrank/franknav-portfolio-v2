@@ -2,6 +2,7 @@ import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
 import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { fileURLToPath } from 'url'
 
 import { Categories } from './collections/Categories'
@@ -105,4 +106,9 @@ export default buildConfig({
     },
     tasks: [],
   },
+  email: nodemailerAdapter({
+    defaultFromAddress: 'franknavarrette@outlook.com',
+    defaultFromName: 'Frank Nav Portfolio',
+    // transportOptions are optional, if not provided it will use ethereal email for testing
+  }),
 })
