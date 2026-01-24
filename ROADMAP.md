@@ -23,8 +23,8 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 ## Phase 2: UX Research & Content Migration
 
 - [ ] Define user personas & success metrics
-- [/] Finalize content strategy & Information Architecture
-- [/] Build Page Skeleton via Payload Admin UI (on `main`)
+- [x] Finalize content strategy & Information Architecture
+- [x] Build Page Skeleton via Payload Admin UI (on `main`)
 - [ ] Seed database with initial English content
 - [ ] Migrate existing projects/content from the old site
 - [ ] Translate core content via Payload Admin Locale Toggle
@@ -32,8 +32,8 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 ## Phase 3: Design System & Customization
 
 - [ ] Configure Tailwind theme (Brand colors, Typography, Spacing)
-- [ ] Develop core UI component library
-- [ ] Apply brand styling to global Header/Footer layouts
+- [/] Develop core UI component library
+- [/] Apply brand styling to global Header/Footer layouts
 
 ## Phase 4: Development & Features
 
