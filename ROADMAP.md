@@ -15,6 +15,7 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 - [x] Configure Backend Localization infrastructure (`en`/`es`)
 - [x] Register `Settings` Global for localized static text
 - [x] Establish Atomic Git Workflow (.agent/workflows/git.md)
+- [x] Establish Local-First Migration practice (Execute `payload migrate` locally before push)
 - [ ] Configure Vercel deployment pipeline
 - [ ] Connect custom domain `franknav.com`
 
