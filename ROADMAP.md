@@ -2,6 +2,16 @@
 
 Use this checklist to track the project's progress. Items marked with `[x]` are complete.
 
+### **Summary of the New Plan**
+
+| Feature             | Phase 1: Experimental (Next 2 Months)  | Phase 2: Production (Final Month)         |
+| :------------------ | :------------------------------------- | :---------------------------------------- |
+| **Database Mode**   | **`push: true`** (Auto-sync)           | **`push: false`** (Manual Migrations)     |
+| **Workflow**        | Change code -> Save -> Test.           | Create Migration -> Review -> Deploy.     |
+| **Migration Files** | **None.** (Skip to stay fast)          | One "Master" migration, then incremental. |
+| **Vercel Build**    | Skip `payload migrate` to avoid hangs. | Run `payload migrate` automatically.      |
+| **Data Safety**     | Dummy content only.                    | Real content (strictly protected).        |
+
 ## Phase 0: Pre-planning & Design
 
 - [x] Define core objectives & target audience
