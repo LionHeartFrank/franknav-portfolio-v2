@@ -21,7 +21,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         if (item.blockType === 'menuGroup') {
           return (
             <div key={i} className="relative group">
-              <button className="flex items-center gap-1 text-sm font-medium hover:text-primary">
+              <button className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary">
                 {item.label}
               </button>
               <div className="absolute hidden group-hover:block bg-background border rounded-md p-2 min-w-[150px] top-full left-0 shadow-lg">
