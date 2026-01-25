@@ -22,6 +22,7 @@ export async function generateStaticParams() {
     overrideAccess: false,
     pagination: false,
     select: {
+      breadcrumbs: true,
       slug: true,
     },
   })
@@ -30,8 +31,9 @@ export async function generateStaticParams() {
     ?.filter((doc) => {
       return doc.slug !== 'home'
     })
-    .map(({ slug }) => {
-      return { slug }
+    .map((doc) => {
+      const segments = doc.breadcrumbs?.slice(-1)[0]?.url?.split('/').filter(Boolean) || [doc.slug]
+      return { slug: segments }
     })
 
   return params
@@ -39,7 +41,7 @@ export async function generateStaticParams() {
 
 type Args = {
   params: Promise<{
-    slug?: string
+    slug?: string[]
   }>
 }
 
@@ -47,18 +49,17 @@ import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export default async function Page({ params: paramsPromise }: Args) {
   const { isEnabled: draft } = await draftMode()
-  const { slug = 'home' } = await paramsPromise
-  // Decode to support slugs with special characters
-  const decodedSlug = decodeURIComponent(slug)
-  const url = '/' + decodedSlug
+  const { slug = ['home'] } = await paramsPromise
+  const url = '/' + (Array.isArray(slug) ? slug.join('/') : slug)
+
   let page: RequiredDataFromCollectionSlug<'pages'> | null
 
-  page = await queryPageBySlug({
-    slug: decodedSlug,
+  page = await queryPageByPath({
+    path: url,
   })
 
   // Remove this code once your website is seeded
-  if (!page && slug === 'home') {
+  if (!page && slug && (slug[0] === 'home' || slug.length === 0)) {
     page = homeStatic
   }
 
@@ -87,17 +88,16 @@ export default async function Page({ params: paramsPromise }: Args) {
 }
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { slug = 'home' } = await paramsPromise
-  // Decode to support slugs with special characters
-  const decodedSlug = decodeURIComponent(slug)
-  const page = await queryPageBySlug({
-    slug: decodedSlug,
+  const { slug = ['home'] } = await paramsPromise
+  const url = '/' + (Array.isArray(slug) ? slug.join('/') : slug)
+  const page = await queryPageByPath({
+    path: url,
   })
 
   return generateMeta({ doc: page })
 }
 
-const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
+const queryPageByPath = cache(async ({ path }: { path: string }) => {
   const { isEnabled: draft } = await draftMode()
 
   const payload = await getPayload({ config: configPromise })
@@ -109,8 +109,8 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
     pagination: false,
     overrideAccess: draft,
     where: {
-      slug: {
-        equals: slug,
+      'breadcrumbs.url': {
+        equals: path,
       },
     },
   })
