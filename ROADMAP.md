@@ -50,7 +50,8 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 ## Phase 3: Design System & Customization
 
 - [ ] Configure Tailwind theme (Brand colors, Typography, Spacing)
-  - [ ] Define project-wide color system (HSL variables)
+  - [ ] Define project-wide color system (HSL variables) - [Proposal](./docs/proposals/color-system.md)
+
   - [ ] Select and standardize icon set (e.g., Lucide-React)
   - [ ] Audit and integrate `shadcn/ui` components
   - [ ] Audit and integrate `next-themes` components
@@ -59,6 +60,7 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
   - [ ] Audit and integrate `next-seo` components
   - [ ] Audit and integrate `next-sitemap` components
   - [ ] Audit and integrate `next-og-image` components
+
 - [ ] Create Workspace level rules for Agent to follow to ensure brand consistency and accessibility
   - [ ] Ensure all components are accessible and follow WCAG 2+ AAA standards
   - [ ] Ensure all components are responsive and follow mobile-first design principle
