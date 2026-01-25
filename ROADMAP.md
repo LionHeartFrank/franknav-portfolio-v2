@@ -51,6 +51,9 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 ## Phase 3: Design System & Customization
 
 - [ ] Configure Tailwind theme (Brand colors, Typography, Spacing)
+  - [ ] Define project-wide color system (HSL variables)
+  - [ ] Select and standardize icon set (e.g., Lucide-React)
+  - [ ] Audit and integrate `shadcn/ui` components
 - [ ] Develop core UI component library
 - [ ] Apply brand styling to global Header/Footer layouts
 
