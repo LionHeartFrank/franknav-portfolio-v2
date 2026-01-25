@@ -77,9 +77,9 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 
 ---
 
-## 🛑 PHASE TRANSITION GATE (DO NOT SKIP)
+# 🛑 PHASE TRANSITION GATE (DO NOT SKIP)
 
-### Content Migration Phase
+## Phase 5: Content Migration Phase
 
 _This section must be completed BEFORE moving to Phase 5: Testing & Launch._
 
@@ -94,7 +94,7 @@ _This section must be completed BEFORE moving to Phase 5: Testing & Launch._
 
 ---
 
-## Phase 5: Testing & Launch
+## Phase 6: Testing & Launch
 
 - [ ] Cross-browser & Mobile responsiveness audit
 - [ ] Content Audit
