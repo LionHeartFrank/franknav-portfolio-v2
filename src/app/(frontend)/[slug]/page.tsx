@@ -43,6 +43,8 @@ type Args = {
   }>
 }
 
+import { Breadcrumbs } from '@/components/Breadcrumbs'
+
 export default async function Page({ params: paramsPromise }: Args) {
   const { isEnabled: draft } = await draftMode()
   const { slug = 'home' } = await paramsPromise
@@ -64,7 +66,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     return <PayloadRedirects url={url} />
   }
 
-  const { hero, layout } = page
+  const { breadcrumbs, hero, layout } = page
 
   return (
     <article className="pt-16 pb-24">
@@ -73,6 +75,10 @@ export default async function Page({ params: paramsPromise }: Args) {
       <PayloadRedirects disableNotFound url={url} />
 
       {draft && <LivePreviewListener />}
+
+      <div className="container mb-8">
+        <Breadcrumbs items={breadcrumbs} />
+      </div>
 
       <RenderHero {...hero} />
       <RenderBlocks blocks={layout} />
