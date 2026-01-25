@@ -7,6 +7,12 @@ description: Expert guidelines and technical reference for Payload CMS 3.0 devel
 
 This skill incorporates the core development principles, security patterns, and technical references for Payload CMS 3.0.
 
+## 👑 Core Identity & Rules (AGENTS.md)
+
+The most important rules for my role and operation in this project are defined in:
+
+- [AGENTS.md](../../AGENTS.md): Definitive role definition and core project rules.
+
 ## Expert Guidelines
 
 You must follow the specialized rules located in the `rules/` directory of this skill:
