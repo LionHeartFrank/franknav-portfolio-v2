@@ -223,6 +223,7 @@ export const seed = async ({
       data: {
         navItems: [
           {
+            blockType: 'link',
             link: {
               type: 'custom',
               label: 'Posts',
@@ -230,6 +231,7 @@ export const seed = async ({
             },
           },
           {
+            blockType: 'link',
             link: {
               type: 'reference',
               label: 'Contact',
