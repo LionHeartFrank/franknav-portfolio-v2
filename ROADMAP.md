@@ -51,7 +51,7 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 
 - [ ] Configure Tailwind theme (Brand colors, Typography, Spacing)
   - [ ] Define project-wide color system (HSL variables) - [Proposal](./docs/proposals/color-system.md)
-
+  - [ ] Site Branding & SEO Integration - [Proposal](./docs/proposals/site-branding-and-seo.md)
   - [ ] Select and standardize icon set (e.g., Lucide-React)
   - [ ] Audit and integrate `shadcn/ui` components
   - [ ] Audit and integrate `next-themes` components
