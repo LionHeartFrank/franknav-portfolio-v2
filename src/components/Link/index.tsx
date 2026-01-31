@@ -33,12 +33,22 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     url,
   } = props
 
-  const href =
-    type === 'reference' && typeof reference?.value === 'object' && reference.value.slug
-      ? `${reference?.relationTo !== 'pages' ? `/${reference?.relationTo}` : ''}/${
-          reference.value.slug
-        }`
-      : url
+  // For nested pages, use the breadcrumb URL if available
+  let href = url
+  if (type === 'reference' && typeof reference?.value === 'object') {
+    const doc = reference.value
+
+    // For pages, try to use breadcrumb URL first (supports nested routing)
+    if (reference.relationTo === 'pages' && 'breadcrumbs' in doc && doc.breadcrumbs) {
+      const breadcrumbs = doc.breadcrumbs as Array<{ url?: string | null }>
+      const breadcrumbUrl = breadcrumbs[breadcrumbs.length - 1]?.url
+      href = breadcrumbUrl || `/${doc.slug}`
+    }
+    // For posts and pages without breadcrumbs, use slug-based URL
+    else if (doc.slug) {
+      href = `${reference.relationTo !== 'pages' ? `/${reference.relationTo}` : ''}/${doc.slug}`
+    }
+  }
 
   if (!href) return null
 
