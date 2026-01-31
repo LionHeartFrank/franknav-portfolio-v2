@@ -67,7 +67,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     return <PayloadRedirects url={url} />
   }
 
-  const { breadcrumbs, hero, layout } = page
+  const { breadcrumbs, hero, layout, hideBreadcrumbs } = page
 
   return (
     <article className="pt-16 pb-24">
@@ -77,9 +77,11 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      <div className="container mb-8">
-        <Breadcrumbs items={breadcrumbs} />
-      </div>
+      {!hideBreadcrumbs && breadcrumbs && breadcrumbs.length > 0 && (
+        <div className="container mb-8">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+      )}
 
       <RenderHero {...hero} />
       <RenderBlocks blocks={layout} />

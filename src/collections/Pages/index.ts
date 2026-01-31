@@ -140,6 +140,16 @@ export const Pages: CollectionConfig<'pages'> = {
       },
       relationTo: 'pages',
     },
+    {
+      name: 'hideBreadcrumbs',
+      type: 'checkbox',
+      label: 'Hide Breadcrumbs',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description: 'Check this to hide breadcrumbs on this page',
+      },
+    },
     slugField(),
   ],
   hooks: {

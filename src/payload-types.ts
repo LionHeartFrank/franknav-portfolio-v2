@@ -214,6 +214,10 @@ export interface Page {
   publishedAt?: string | null;
   parent?: (number | null) | Page;
   /**
+   * Check this to hide breadcrumbs on this page
+   */
+  hideBreadcrumbs?: boolean | null;
+  /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
   generateSlug?: boolean | null;
@@ -1108,6 +1112,7 @@ export interface PagesSelect<T extends boolean = true> {
       };
   publishedAt?: T;
   parent?: T;
+  hideBreadcrumbs?: T;
   generateSlug?: T;
   slug?: T;
   breadcrumbs?:
