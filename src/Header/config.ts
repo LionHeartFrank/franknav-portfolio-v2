@@ -29,6 +29,17 @@ export const Header: GlobalConfig = {
               type: 'text',
               required: true,
             },
+            link({
+              overrides: {
+                name: 'parentLink',
+                label: 'Parent Link (Optional)',
+                admin: {
+                  description:
+                    'Optional link for the parent label. If not set, the label will not be clickable.',
+                },
+              },
+              appearances: false,
+            }),
             {
               name: 'links',
               type: 'array',

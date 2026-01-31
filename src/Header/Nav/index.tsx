@@ -19,11 +19,26 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         }
 
         if (item.blockType === 'menuGroup') {
+          const hasParentLink =
+            item.parentLink?.type &&
+            ((item.parentLink.type === 'reference' && item.parentLink.reference) ||
+              (item.parentLink.type === 'custom' && item.parentLink.url))
+
           return (
             <div key={i} className="relative group">
-              <button className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary">
-                {item.label}
-              </button>
+              {hasParentLink ? (
+                <CMSLink
+                  {...item.parentLink}
+                  appearance="link"
+                  className="flex items-center gap-1 text-sm font-medium"
+                >
+                  {item.label}
+                </CMSLink>
+              ) : (
+                <button className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary">
+                  {item.label}
+                </button>
+              )}
               <div className="absolute hidden group-hover:block bg-background border rounded-md p-2 min-w-[150px] top-full left-0 shadow-lg">
                 <ul className="flex flex-col gap-2">
                   {item.links?.map((linkItem, j) => (

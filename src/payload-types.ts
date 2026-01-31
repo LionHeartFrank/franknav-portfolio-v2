@@ -1684,6 +1684,24 @@ export interface Header {
           }
         | {
             label: string;
+            /**
+             * Optional link for the parent label. If not set, the label will not be clickable.
+             */
+            parentLink: {
+              type?: ('reference' | 'custom') | null;
+              newTab?: boolean | null;
+              reference?:
+                | ({
+                    relationTo: 'pages';
+                    value: number | Page;
+                  } | null)
+                | ({
+                    relationTo: 'posts';
+                    value: number | Post;
+                  } | null);
+              url?: string | null;
+              label: string;
+            };
             links?:
               | {
                   link: {
@@ -1787,6 +1805,15 @@ export interface HeaderSelect<T extends boolean = true> {
           | T
           | {
               label?: T;
+              parentLink?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
               links?:
                 | T
                 | {
