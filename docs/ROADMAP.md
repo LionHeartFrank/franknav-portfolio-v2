@@ -50,8 +50,8 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 ## Phase 3: Design System & Customization
 
 - [ ] Configure Tailwind theme (Brand colors, Typography, Spacing)
-  - [ ] Define project-wide color system (HSL variables) - [Proposal](./docs/proposals/color-system.md)
-  - [ ] Site Branding & SEO Integration - [Proposal](./docs/proposals/site-branding-and-seo.md)
+  - [ ] Define project-wide color system (HSL variables) - [Proposal](./proposals/color-system.md)
+  - [ ] Site Branding & SEO Integration - [Proposal](./proposals/site-branding-and-seo.md)
   - [ ] Select and standardize icon set (e.g., Lucide-React)
   - [ ] Audit and integrate `shadcn/ui` components
   - [ ] Audit and integrate `next-themes` components
@@ -74,7 +74,7 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 - [ ] Build custom interactive portfolio showcase
 - [ ] Implement contact forms & lead management
 - [ ] **Advanced Content Editor**: Upgrade Lexical editor for code blocks and markdown support.
-  - [Proposal: Advanced Lexical Editor](./docs/proposals/future-features/advanced-editor.md)
+  - [Proposal: Advanced Lexical Editor](./proposals/future-features/advanced-editor.md)
 - [ ] **Frontend Localization**: Implement the user-facing language toggle
 - [ ] Accessibility audit for all pages and components
 - [ ] Performance audit for all pages and components
@@ -119,9 +119,9 @@ _This section must be completed BEFORE moving to Phase 5: Testing & Launch._
 ## Phase 7: Future Features and Improvements
 
 - [ ] **Expanded Multi-Tab Settings**: Re-introduce organized tabs for site-wide configuration.
-  - [Suggestion: Settings Expansion & Improvements](./docs/proposals/future-features/settings-expansion.md)
+  - [Suggestion: Settings Expansion & Improvements](./proposals/future-features/settings-expansion.md)
 - [ ] **Custom Breadcrumbs**: Allow per-page breadcrumb overrides.
-  - [Phase 7: Custom Breadcrumbs Proposal](./docs/proposals/future-features/custom-breadcrumbs.md)
+  - [Phase 7: Custom Breadcrumbs Proposal](./proposals/future-features/custom-breadcrumbs.md)
   - [ ] Add `customBreadcrumbs` field to `Pages` collection sidebar.
   - [ ] Update `Breadcrumbs` component for override logic.
 - [ ] **Advanced Portfolio Features**:

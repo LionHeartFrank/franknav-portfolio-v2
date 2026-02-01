@@ -7,7 +7,8 @@ This PR implements full support for nested page routing (e.g., `/parent/child`) 
 
 ### 1. Nested Routing & Content Resolution
 - **Catch-all Routing**: Migrated frontend routes from `[slug]` to `[...slug]`.
-- **Breadcrumb Query Logic**: Optimized `queryPageByPath` to strictly match the last segment of the breadcrumb trail, ensuring parent pages no longer incorrectly render child content.
+- **Breadcrumb Query Logic**: Optimized `queryPageByPath` with increased result limits (100) and strict last-segment matching to handle deep hierarchies.
+- **Robustness**: Refactored `generateStaticParams` and homepage fallback logic to safely handle null slugs or empty breadcrumbs.
 - **CMSLink Enhancement**: Updated the `CMSLink` component to automatically utilize breadcrumb URLs for nested pages.
 
 ### 2. Header & Navigation Overhaul

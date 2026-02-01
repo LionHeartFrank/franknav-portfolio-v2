@@ -12,6 +12,7 @@ import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -32,9 +33,17 @@ export async function generateStaticParams() {
       return doc.slug !== 'home'
     })
     .map((doc) => {
-      const segments = doc.breadcrumbs?.slice(-1)[0]?.url?.split('/').filter(Boolean) || [doc.slug]
+      const breadcrumbs = doc.breadcrumbs || []
+      const lastBreadcrumb = breadcrumbs[breadcrumbs.length - 1]
+      const segments =
+        lastBreadcrumb?.url?.split('/').filter(Boolean) || (doc.slug ? [doc.slug] : [])
+
+      // Ensure we don't return an empty array or [undefined]
+      if (segments.length === 0) return null
+
       return { slug: segments }
     })
+    .filter(Boolean)
 
   return params
 }
@@ -45,12 +54,13 @@ type Args = {
   }>
 }
 
-import { Breadcrumbs } from '@/components/Breadcrumbs'
-
 export default async function Page({ params: paramsPromise }: Args) {
   const { isEnabled: draft } = await draftMode()
-  const { slug = ['home'] } = await paramsPromise
-  const url = '/' + (Array.isArray(slug) ? slug.join('/') : slug)
+  const { slug } = await paramsPromise
+
+  // Handle root path / by checking if slug is undefined or empty
+  const isHomePage = !slug || slug.length === 0 || (slug.length === 1 && slug[0] === 'home')
+  const url = isHomePage ? '/' : '/' + slug.join('/')
 
   let page: RequiredDataFromCollectionSlug<'pages'> | null
 
@@ -58,8 +68,8 @@ export default async function Page({ params: paramsPromise }: Args) {
     path: url,
   })
 
-  // Remove this code once your website is seeded
-  if (!page && slug && (slug[0] === 'home' || slug.length === 0)) {
+  // Fallback for home page if not found in DB (initial setup)
+  if (!page && isHomePage) {
     page = homeStatic
   }
 
@@ -107,10 +117,11 @@ const queryPageByPath = cache(async ({ path }: { path: string }) => {
   // For nested documents, we need to match the EXACT path.
   // Querying on breadcrumbs.url matches if ANY breadcrumb contains the url.
   // So we fetch all potential matches and find the one where the LAST breadcrumb matches.
+  // We use a higher limit to ensure we don't miss the exact match in deep hierarchies.
   const result = await payload.find({
     collection: 'pages',
     draft,
-    limit: 10, // Fetch a few to be safe, though usually 1 or 2
+    limit: 100,
     pagination: false,
     overrideAccess: draft,
     where: {
