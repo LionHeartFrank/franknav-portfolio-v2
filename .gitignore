@@ -12,6 +12,9 @@ public/media/
 public/robots.txt
 public/sitemap*.xml
 
+# Build artifacts
+package-lock.json
+tsconfig.tsbuildinfo
 
 # Playwright
 node_modules/
