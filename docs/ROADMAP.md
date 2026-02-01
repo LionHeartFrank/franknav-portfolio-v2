@@ -73,6 +73,8 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 
 - [ ] Build custom interactive portfolio showcase
 - [ ] Implement contact forms & lead management
+- [ ] **Advanced Content Editor**: Upgrade Lexical editor for code blocks and markdown support.
+  - [Proposal: Advanced Lexical Editor](./docs/proposals/future-features/advanced-editor.md)
 - [ ] **Frontend Localization**: Implement the user-facing language toggle
 - [ ] Accessibility audit for all pages and components
 - [ ] Performance audit for all pages and components

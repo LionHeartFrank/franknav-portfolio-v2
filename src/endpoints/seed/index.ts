@@ -46,7 +46,7 @@ export const seed = async ({
   // clear the database
   await Promise.all(
     globals.map((global) => {
-      const data: any = {}
+      const data: Record<string, unknown> = {}
       if (global !== 'settings') {
         data.navItems = []
       }
