@@ -120,7 +120,6 @@ const MenuGroup: React.FC<{
         className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary"
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={handleButtonKeyDown}
-        onFocus={() => setIsOpen(true)}
         onBlur={(e) => {
           // Only close if focus is moving outside the menu group
           if (!menuRef.current?.contains(e.relatedTarget as Node)) {
@@ -153,7 +152,7 @@ const MenuGroup: React.FC<{
                 if (linkData.reference.relationTo === 'pages' && 'breadcrumbs' in doc && doc.breadcrumbs) {
                   const breadcrumbs = doc.breadcrumbs as Array<{ url?: string | null }>
                   const breadcrumbUrl = breadcrumbs[breadcrumbs.length - 1]?.url
-                  href = breadcrumbUrl || `/${doc.slug}`
+                  href = breadcrumbUrl || ('slug' in doc ? `/${doc.slug}` : '')
                 } else if ('slug' in doc && doc.slug) {
                   href = `${linkData.reference.relationTo !== 'pages' ? `/${linkData.reference.relationTo}` : ''}/${doc.slug}`
                 }
@@ -163,15 +162,15 @@ const MenuGroup: React.FC<{
 
               return (
                 <li key={j} role="none">
-                  <a
+                  <Link
                     href={href}
-                    className="whitespace-nowrap text-sm font-medium hover:underline"
+                    className="whitespace-nowrap text-sm font-medium hover:underline block"
                     role="menuitem"
                     tabIndex={focusedIndex === j ? 0 : -1}
                     {...newTabProps}
                   >
                     {linkData.label}
-                  </a>
+                  </Link>
                 </li>
               )
             })}
