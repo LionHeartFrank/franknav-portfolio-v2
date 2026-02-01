@@ -8,28 +8,18 @@ export const Settings: GlobalConfig = {
   },
   fields: [
     {
-      type: 'tabs',
-      tabs: [
-        {
-          label: 'General',
-          fields: [
-            {
-              name: 'siteTitle',
-              type: 'text',
-              localized: true,
-              label: 'Site Title',
-              defaultValue: 'Frank Nav Portfolio',
-            },
-            {
-              name: 'description',
-              type: 'textarea',
-              localized: true,
-              label: 'Site Description',
-              defaultValue: 'UX/UI Designer & Junior FullStack Developer',
-            },
-          ],
-        },
-      ],
+      name: 'siteTitle',
+      type: 'text',
+      localized: true,
+      label: 'Site Title',
+      defaultValue: 'Frank Nav Portfolio',
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+      localized: true,
+      label: 'Site Description',
+      defaultValue: 'UX/UI Designer & Junior FullStack Developer',
     },
   ],
 }
