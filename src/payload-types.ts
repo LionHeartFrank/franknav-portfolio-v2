@@ -1687,7 +1687,7 @@ export interface Header {
             /**
              * Optional link for the parent label. If not set, the label will not be clickable.
              */
-            parentLink: {
+            parentLink?: {
               type?: ('reference' | 'custom') | null;
               newTab?: boolean | null;
               reference?:
@@ -1700,7 +1700,6 @@ export interface Header {
                     value: number | Post;
                   } | null);
               url?: string | null;
-              label: string;
             };
             links?:
               | {
@@ -1768,13 +1767,6 @@ export interface Setting {
   id: number;
   siteTitle?: string | null;
   description?: string | null;
-  navItems?:
-    | {
-        label: string;
-        link: string;
-        id?: string | null;
-      }[]
-    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1812,7 +1804,6 @@ export interface HeaderSelect<T extends boolean = true> {
                     newTab?: T;
                     reference?: T;
                     url?: T;
-                    label?: T;
                   };
               links?:
                 | T
@@ -1866,13 +1857,6 @@ export interface FooterSelect<T extends boolean = true> {
 export interface SettingsSelect<T extends boolean = true> {
   siteTitle?: T;
   description?: T;
-  navItems?:
-    | T
-    | {
-        label?: T;
-        link?: T;
-        id?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -29,34 +29,6 @@ export const Settings: GlobalConfig = {
             },
           ],
         },
-        {
-          label: 'Navigation',
-          fields: [
-            {
-              name: 'navItems',
-              type: 'array',
-              label: 'Navigation Items',
-              minRows: 1,
-              maxRows: 5,
-              fields: [
-                {
-                  name: 'label',
-                  type: 'text',
-                  localized: true,
-                  label: 'Label',
-                  required: true,
-                },
-                {
-                  name: 'link',
-                  type: 'text',
-                  label: 'Link (Slug)',
-                  defaultValue: '/',
-                  required: true,
-                },
-              ],
-            },
-          ],
-        },
       ],
     },
   ],

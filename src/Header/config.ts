@@ -39,6 +39,7 @@ export const Header: GlobalConfig = {
                 },
               },
               appearances: false,
+              disableLabel: true,
             }),
             {
               name: 'links',

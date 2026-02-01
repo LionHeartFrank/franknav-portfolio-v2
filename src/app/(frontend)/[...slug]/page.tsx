@@ -104,10 +104,13 @@ const queryPageByPath = cache(async ({ path }: { path: string }) => {
 
   const payload = await getPayload({ config: configPromise })
 
+  // For nested documents, we need to match the EXACT path.
+  // Querying on breadcrumbs.url matches if ANY breadcrumb contains the url.
+  // So we fetch all potential matches and find the one where the LAST breadcrumb matches.
   const result = await payload.find({
     collection: 'pages',
     draft,
-    limit: 1,
+    limit: 10, // Fetch a few to be safe, though usually 1 or 2
     pagination: false,
     overrideAccess: draft,
     where: {
@@ -117,5 +120,11 @@ const queryPageByPath = cache(async ({ path }: { path: string }) => {
     },
   })
 
-  return result.docs?.[0] || null
+  // Find the doc where the last breadcrumb is the path we want
+  const page = result.docs?.find((doc) => {
+    const breadcrumbs = doc.breadcrumbs as Array<{ url?: string | null }> | undefined
+    return breadcrumbs?.[breadcrumbs.length - 1]?.url === path
+  })
+
+  return page || null
 })
