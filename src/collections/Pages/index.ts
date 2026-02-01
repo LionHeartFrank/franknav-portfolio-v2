@@ -31,27 +31,36 @@ export const Pages: CollectionConfig<'pages'> = {
   },
   // This config controls what's populated by default when a page is referenced
   // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
-  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'pages'>
+  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'pages'>`
   defaultPopulate: {
     title: true,
     slug: true,
+    breadcrumbs: true, // Include breadcrumbs for nested routing support
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
-      url: ({ data, req }) =>
-        generatePreviewPath({
+      url: ({ data, req }) => {
+        const breadcrumbs = data?.breadcrumbs as Array<{ url?: string | null }> | undefined
+        const breadcrumbUrl = breadcrumbs?.[breadcrumbs.length - 1]?.url
+        return generatePreviewPath({
           slug: data?.slug,
           collection: 'pages',
           req,
-        }),
+          breadcrumbUrl,
+        })
+      },
     },
-    preview: (data, { req }) =>
-      generatePreviewPath({
+    preview: (data, { req }) => {
+      const breadcrumbs = data?.breadcrumbs as Array<{ url?: string | null }> | undefined
+      const breadcrumbUrl = breadcrumbs?.[breadcrumbs.length - 1]?.url
+      return generatePreviewPath({
         slug: data?.slug as string,
         collection: 'pages',
         req,
-      }),
+        breadcrumbUrl,
+      })
+    },
     useAsTitle: 'title',
   },
   fields: [
@@ -115,6 +124,31 @@ export const Pages: CollectionConfig<'pages'> = {
       type: 'date',
       admin: {
         position: 'sidebar',
+      },
+    },
+    {
+      name: 'parent',
+      type: 'relationship',
+      admin: {
+        position: 'sidebar',
+      },
+      filterOptions: ({ id }) => {
+        return {
+          id: {
+            not_equals: id,
+          },
+        }
+      },
+      relationTo: 'pages',
+    },
+    {
+      name: 'hideBreadcrumbs',
+      type: 'checkbox',
+      label: 'Hide Breadcrumbs',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description: 'Check this to hide breadcrumbs on this page',
       },
     },
     slugField(),
