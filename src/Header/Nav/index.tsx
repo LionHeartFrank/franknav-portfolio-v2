@@ -95,8 +95,8 @@ const MenuGroup: React.FC<{
 
   useEffect(() => {
     if (isOpen && focusedIndex >= 0 && menuRef.current) {
-      const links = menuRef.current.querySelectorAll('a')
-      const link = links[focusedIndex] as HTMLElement
+      const linkElements = menuRef.current.querySelectorAll('a')
+      const link = linkElements[focusedIndex] as HTMLElement
       link?.focus()
     }
   }, [focusedIndex, isOpen])
@@ -143,17 +143,38 @@ const MenuGroup: React.FC<{
           onKeyDown={handleMenuKeyDown}
         >
           <ul className="flex flex-col gap-2">
-            {links.map((linkItem, j: number) => (
-              <li key={j} role="none">
-                <div role="menuitem" tabIndex={focusedIndex === j ? 0 : -1}>
-                  <CMSLink
-                    {...linkItem.link}
-                    appearance="link"
-                    className="whitespace-nowrap"
-                  />
-                </div>
-              </li>
-            ))}
+            {links.map((linkItem, j) => {
+              // Calculate href for the menu item
+              const linkData = linkItem.link
+              let href = linkData.url || ''
+              
+              if (linkData.type === 'reference' && typeof linkData.reference?.value === 'object') {
+                const doc = linkData.reference.value
+                if (linkData.reference.relationTo === 'pages' && 'breadcrumbs' in doc && doc.breadcrumbs) {
+                  const breadcrumbs = doc.breadcrumbs as Array<{ url?: string | null }>
+                  const breadcrumbUrl = breadcrumbs[breadcrumbs.length - 1]?.url
+                  href = breadcrumbUrl || `/${doc.slug}`
+                } else if ('slug' in doc && doc.slug) {
+                  href = `${linkData.reference.relationTo !== 'pages' ? `/${linkData.reference.relationTo}` : ''}/${doc.slug}`
+                }
+              }
+
+              const newTabProps = linkData.newTab ? { rel: 'noopener noreferrer', target: '_blank' } : {}
+
+              return (
+                <li key={j} role="none">
+                  <a
+                    href={href}
+                    className="whitespace-nowrap text-sm font-medium hover:underline"
+                    role="menuitem"
+                    tabIndex={focusedIndex === j ? 0 : -1}
+                    {...newTabProps}
+                  >
+                    {linkData.label}
+                  </a>
+                </li>
+              )
+            })}
           </ul>
         </div>
       )}
