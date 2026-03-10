@@ -40,11 +40,11 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 - [x] Configure Vercel deployment pipeline
 
 ### Rules and Tooling Architecture. 
-- [ ] Create Workspace level rules for Agent to follow to ensure brand consistency and accessibility
-  - [ ] Ensure all components are accessible and follow WCAG 2+ AAA standards
-  - [ ] Ensure all components are responsive and follow mobile-first design principle
-- [ ] Ensure all components are performant and follow best practices
-- [ ] Ensure colors are WCAG 2+ AAA standards and Advanced Perceptual Contrast Algorithm (APCA).
+- [x] Create Workspace level rules for Agent to follow to ensure brand consistency and accessibility
+  - [x] Ensure all components are accessible and follow WCAG 2+ AAA standards
+  - [x] Ensure all components are responsive and follow mobile-first design principle
+- [x] Ensure all components are performant and follow best practices
+- [x] Ensure colors are WCAG 2+ AAA standards and Advanced Perceptual Contrast Algorithm (APCA).
 
 ### UI Component Library (Figma)
 - [ ] Develop core UI component library (using shadcn/ui as a base) in Figma
