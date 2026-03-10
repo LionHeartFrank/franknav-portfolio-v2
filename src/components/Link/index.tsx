@@ -5,25 +5,17 @@ import React from 'react'
 
 import type { Page, Post } from '@/payload-types'
 
-type CMSLinkType = {
+type CMSLinkType = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & {
   appearance?: 'inline' | ButtonProps['variant']
   children?: React.ReactNode
   className?: string
   label?: string | null
   newTab?: boolean | null
-  onBlur?: React.FocusEventHandler<HTMLAnchorElement>
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>
-  onFocus?: React.FocusEventHandler<HTMLAnchorElement>
-  onKeyDown?: React.KeyboardEventHandler<HTMLAnchorElement>
-  onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement>
-  onMouseLeave?: React.MouseEventHandler<HTMLAnchorElement>
   reference?: {
     relationTo: 'pages' | 'posts'
     value: Page | Post | string | number
   } | null
-  role?: string
   size?: ButtonProps['size'] | null
-  tabIndex?: number
   type?: 'custom' | 'reference' | null
   url?: string | null
 }
@@ -39,6 +31,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     reference,
     size: sizeFromProps,
     url,
+    ...rest
   } = props
 
   // For nested pages, use the breadcrumb URL if available
@@ -66,19 +59,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   /* Ensure we don't break any styles set by richText */
   if (appearance === 'inline') {
     return (
-      <Link
-        className={cn(className)}
-        href={href || url || ''}
-        {...newTabProps}
-        onBlur={props.onBlur}
-        onClick={props.onClick}
-        onFocus={props.onFocus}
-        onKeyDown={props.onKeyDown}
-        onMouseEnter={props.onMouseEnter}
-        onMouseLeave={props.onMouseLeave}
-        role={props.role}
-        tabIndex={props.tabIndex}
-      >
+      <Link className={cn(className)} href={href || url || ''} {...newTabProps} {...rest}>
         {label && label}
         {children && children}
       </Link>
@@ -87,19 +68,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
 
   return (
     <Button asChild className={className} size={size} variant={appearance}>
-      <Link
-        className={cn(className)}
-        href={href || url || ''}
-        {...newTabProps}
-        onBlur={props.onBlur}
-        onClick={props.onClick}
-        onFocus={props.onFocus}
-        onKeyDown={props.onKeyDown}
-        onMouseEnter={props.onMouseEnter}
-        onMouseLeave={props.onMouseLeave}
-        role={props.role}
-        tabIndex={props.tabIndex}
-      >
+      <Link className={cn(className)} href={href || url || ''} {...newTabProps} {...rest}>
         {label && label}
         {children && children}
       </Link>
