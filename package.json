@@ -26,7 +26,7 @@
     "@formatjs/intl-localematcher": "^0.8.0",
     "@payloadcms/admin-bar": "3.70.0",
     "@payloadcms/db-vercel-postgres": "3.70.0",
-    "@payloadcms/email-nodemailer": "^3.73.0",
+    "@payloadcms/email-nodemailer": "3.70.0",
     "@payloadcms/live-preview-react": "3.70.0",
     "@payloadcms/next": "3.70.0",
     "@payloadcms/plugin-form-builder": "3.70.0",
