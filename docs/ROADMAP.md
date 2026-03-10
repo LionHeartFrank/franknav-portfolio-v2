@@ -29,6 +29,7 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 
 ## Phase 1: Setup & Configuration [/]
 
+### Deployment Config
 - [x] Deploy Payload CMS 3.0 template
 - [x] Standardize on `README.md` (resolved case-sensitivity bugs)
 - [x] Configure Backend Localization infrastructure (`en`/`es`)
@@ -36,18 +37,28 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 - [x] Establish Atomic Git Workflow (.agent/workflows/git.md)
 - [x] Establish Local-First Migration practice (Execute `payload migrate` locally before push)
 - [x] Configure Email Adapter (`@payloadcms/email-nodemailer`)
+- [x] Configure Vercel deployment pipeline
 
+### Rules and Tooling Architecture. 
 - [ ] Create Workspace level rules for Agent to follow to ensure brand consistency and accessibility
   - [ ] Ensure all components are accessible and follow WCAG 2+ AAA standards
   - [ ] Ensure all components are responsive and follow mobile-first design principle
 - [ ] Ensure all components are performant and follow best practices
 - [ ] Ensure colors are WCAG 2+ AAA standards and Advanced Perceptual Contrast Algorithm (APCA).
-- [ ] Develop core UI component library
-- [ ] Apply brand styling to global Header/Footer layouts
+
+### UI Component Library (Figma)
+- [ ] Develop core UI component library (using shadcn/ui as a base) in Figma
+  - [ ] Select and standardize icon set
+  - [ ] Select and standardize color palette
+  - [ ] Select and standardize typography
+  - [ ] Select and standardize spacing
+  - [ ] Select and standardize border radius
+  - [ ] Select and standardize shadow
+  - [ ] Select and standardize transition
+  - [ ] Select and standardize animation
+  - [ ] Select and standardize stock images 
 
 
-- [ ] Configure Vercel deployment pipeline
-- [ ] Connect custom domain `franknav.com`
 
 ## Phase 2: UX Research
 
@@ -62,15 +73,16 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 - [ ] Configure Tailwind theme (Brand colors, Typography, Spacing)
   - [ ] Define project-wide color system (HSL variables) - [Proposal](./proposals/color-system.md)
   - [ ] Site Branding & SEO Integration - [Proposal](./proposals/site-branding-and-seo.md)
-  - [ ] Select and standardize icon set (e.g., Lucide-React)
-  - [ ] Audit and integrate `shadcn/ui` components
-  - [ ] Audit and integrate `next-themes` components
-  - [ ] Audit and integrate `next-intl` components
-  - [ ] Audit and integrate `next-auth` components
-  - [ ] Audit and integrate `next-seo` components
-  - [ ] Audit and integrate `next-sitemap` components
-  - [ ] Audit and integrate `next-og-image` components
+    - [ ] Select and standardize icon set (e.g., Lucide-React)
+    - [ ] Audit and integrate `shadcn/ui` components
+    - [ ] Audit and integrate `next-themes` components
+    - [ ] Audit and integrate `next-intl` components
+    - [ ] Audit and integrate `next-auth` components
+    - [ ] Audit and integrate `next-seo` components
+    - [ ] Audit and integrate `next-sitemap` components
+    - [ ] Audit and integrate `next-og-image` components
 
+- [ ] Apply brand styling to global Header/Footer layouts
 
 
 ## Phase 4: Development & Features

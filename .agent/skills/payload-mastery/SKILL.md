@@ -11,7 +11,7 @@ This skill incorporates the core development principles, security patterns, and 
 
 The most important rules for my role and operation in this project are defined in:
 
-- [AGENTS.md](../../AGENTS.md): Definitive role definition and core project rules.
+- [payload-cms.md](../../rules/payload-cms.md): Definitive role definition and core project rules.
 
 ## Expert Guidelines
 
