@@ -19,7 +19,7 @@ const MenuGroup: React.FC<{
 }> = ({ item, index }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [focusedIndex, setFocusedIndex] = useState(-1)
-  const buttonRef = useRef<HTMLButtonElement>(null)
+  const triggerRef = useRef<HTMLElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
 
   const hasParentLink =
@@ -34,8 +34,8 @@ const MenuGroup: React.FC<{
       if (
         menuRef.current &&
         !menuRef.current.contains(event.target as Node) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(event.target as Node)
+        triggerRef.current &&
+        !triggerRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false)
         setFocusedIndex(-1)
@@ -60,7 +60,7 @@ const MenuGroup: React.FC<{
     } else if (e.key === 'Escape') {
       setIsOpen(false)
       setFocusedIndex(-1)
-      buttonRef.current?.focus()
+      triggerRef.current?.focus()
     } else if (e.key === 'ArrowDown') {
       e.preventDefault()
       if (!isOpen) {
@@ -82,7 +82,7 @@ const MenuGroup: React.FC<{
       e.preventDefault()
       setIsOpen(false)
       setFocusedIndex(-1)
-      buttonRef.current?.focus()
+      triggerRef.current?.focus()
     } else if (e.key === 'ArrowDown') {
       e.preventDefault()
       setFocusedIndex((prev) => (prev + 1) % links.length)
@@ -117,6 +117,7 @@ const MenuGroup: React.FC<{
       {hasParentLink ? (
         <CMSLink
           {...item.parentLink}
+          ref={triggerRef as React.RefObject<HTMLAnchorElement>}
           appearance="link"
           className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary"
           onKeyDown={hasLinks ? handleButtonKeyDown : undefined}
@@ -140,7 +141,7 @@ const MenuGroup: React.FC<{
         </CMSLink>
       ) : (
         <button
-          ref={buttonRef}
+          ref={triggerRef as React.RefObject<HTMLButtonElement>}
           className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary"
           onClick={() => hasLinks && setIsOpen(!isOpen)}
           onMouseEnter={hasLinks ? () => setIsOpen(true) : undefined}

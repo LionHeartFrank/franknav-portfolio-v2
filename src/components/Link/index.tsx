@@ -7,6 +7,9 @@ import type { Page, Post } from '@/payload-types'
 
 type CMSLinkType = {
   appearance?: 'inline' | ButtonProps['variant']
+  'aria-controls'?: string
+  'aria-expanded'?: boolean | 'true' | 'false'
+  'aria-haspopup'?: boolean | 'true' | 'false' | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog'
   children?: React.ReactNode
   className?: string
   label?: string | null
@@ -28,7 +31,7 @@ type CMSLinkType = {
   url?: string | null
 }
 
-export const CMSLink: React.FC<CMSLinkType> = (props) => {
+export const CMSLink = React.forwardRef<HTMLAnchorElement, CMSLinkType>((props, ref) => {
   const {
     type,
     appearance = 'inline',
@@ -67,9 +70,13 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   if (appearance === 'inline') {
     return (
       <Link
+        ref={ref}
         className={cn(className)}
         href={href || url || ''}
         {...newTabProps}
+        aria-controls={props['aria-controls']}
+        aria-expanded={props['aria-expanded']}
+        aria-haspopup={props['aria-haspopup']}
         onBlur={props.onBlur}
         onClick={props.onClick}
         onFocus={props.onFocus}
@@ -88,9 +95,13 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   return (
     <Button asChild className={className} size={size} variant={appearance}>
       <Link
+        ref={ref}
         className={cn(className)}
         href={href || url || ''}
         {...newTabProps}
+        aria-controls={props['aria-controls']}
+        aria-expanded={props['aria-expanded']}
+        aria-haspopup={props['aria-haspopup']}
         onBlur={props.onBlur}
         onClick={props.onClick}
         onFocus={props.onFocus}
@@ -105,4 +116,6 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
       </Link>
     </Button>
   )
-}
+})
+
+CMSLink.displayName = 'CMSLink'
