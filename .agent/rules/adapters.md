@@ -1,7 +1,7 @@
 ---
-title: Database Adapters & Transactions
+trigger: glob
 description: Database adapters, storage, email, and transaction patterns
-tags: [payload, database, mongodb, postgres, sqlite, transactions]
+globs: src/payload.config.ts
 ---
 
 # Payload CMS Adapters

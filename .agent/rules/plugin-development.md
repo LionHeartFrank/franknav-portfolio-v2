@@ -1,7 +1,6 @@
 ---
-title: Plugin Development
+trigger: model_decision
 description: Creating Payload CMS plugins with TypeScript patterns
-tags: [payload, plugins, architecture, patterns]
 ---
 
 # Payload Plugin Development

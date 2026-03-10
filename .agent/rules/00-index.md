@@ -17,18 +17,18 @@ Rules are guidelines that the AI agent follows autonomously based on specific tr
 | [`performance.md`](./performance.md) | Enforces Next.js best practices, Server Components, and clean code. | Frontend UI | Agent | High | Glob | `src/app/**/*.tsx, src/components/**/*.tsx` |
 | [`payload-cms.md`](./payload-cms.md) | Definitive core rules and structures for Payload CMS. | Core / General | Payload | Critical | Always On | - |
 | [`security-critical.md`](./security-critical.md) | Critical security patterns for Local API, Hooks, and Access Control. | Security | Payload | Critical | Always On | - |
-| [`access-control.md`](./access-control.md) | Security and permission strategies for collections and fields. | Security | Payload | High | Always On | - |
-| [`access-control-advanced.md`](./access-control-advanced.md) | Complex security scenarios and role-based access control. | Security | Payload | High | Always On | - |
-| [`adapters.md`](./adapters.md) | Database and storage configuration guidelines. | Database / Schema | Payload | Medium | Always On | - |
-| [`collections.md`](./collections.md) | Guidelines for defining collection structures and fields. | Database / Schema | Payload | High | Always On | - |
-| [`components.md`](./components.md) | Custom Admin UI development guidelines. | Admin UI | Payload | Medium | Always On | - |
-| [`endpoints.md`](./endpoints.md) | Custom API routing guidelines. | Backend / API | Payload | Medium | Always On | - |
-| [`field-type-guards.md`](./field-type-guards.md) | TypeScript safety for Payload fields. | Database / Schema | Payload | Medium | Always On | - |
-| [`fields.md`](./fields.md) | Best practices for field definitions. | Database / Schema | Payload | High | Always On | - |
-| [`hooks.md`](./hooks.md) | Patterns for data manipulation in lifecycle hooks. | Database / Schema | Payload | High | Always On | - |
-| [`payload-overview.md`](./payload-overview.md) | Core principles and quick reference for Payload. | Core / General | Payload | High | Always On | - |
-| [`plugin-development.md`](./plugin-development.md) | Extending Payload functionality. | Backend / API | Payload | Medium | Always On | - |
-| [`queries.md`](./queries.md) | Data fetching best practices. | Backend / API | Payload | High | Always On | - |
+| [`access-control.md`](./access-control.md) | Security and permission strategies for collections and fields. | Security | Payload | High | Glob | `src/collections/**/*.ts, src/globals/**/*.ts, src/access/**/*.ts` |
+| [`access-control-advanced.md`](./access-control-advanced.md) | Complex security scenarios and role-based access control. | Security | Payload | High | Glob | `src/collections/**/*.ts, src/globals/**/*.ts, src/access/**/*.ts` |
+| [`adapters.md`](./adapters.md) | Database and storage configuration guidelines. | Database / Schema | Payload | Medium | Glob | `src/payload.config.ts` |
+| [`collections.md`](./collections.md) | Guidelines for defining collection structures and fields. | Database / Schema | Payload | High | Glob | `src/collections/**/*.ts, src/globals/**/*.ts` |
+| [`components.md`](./components.md) | Custom Admin UI development guidelines. | Admin UI | Payload | Medium | Model Decision | - |
+| [`endpoints.md`](./endpoints.md) | Custom API routing guidelines. | Backend / API | Payload | Medium | Model Decision | - |
+| [`field-type-guards.md`](./field-type-guards.md) | TypeScript safety for Payload fields. | Database / Schema | Payload | Medium | Glob | `src/collections/**/*.ts, src/globals/**/*.ts, src/fields/**/*.ts` |
+| [`fields.md`](./fields.md) | Best practices for field definitions. | Database / Schema | Payload | High | Glob | `src/collections/**/*.ts, src/globals/**/*.ts, src/fields/**/*.ts` |
+| [`hooks.md`](./hooks.md) | Patterns for data manipulation in lifecycle hooks. | Database / Schema | Payload | High | Glob | `src/collections/**/*.ts, src/globals/**/*.ts, src/hooks/**/*.ts` |
+| [`payload-overview.md`](./payload-overview.md) | Core principles and quick reference for Payload. | Core / General | Payload | High | Model Decision | - |
+| [`plugin-development.md`](./plugin-development.md) | Extending Payload functionality. | Backend / API | Payload | Medium | Model Decision | - |
+| [`queries.md`](./queries.md) | Data fetching best practices. | Backend / API | Payload | High | Model Decision | - |
 | [`generate-types.md`](./generate-types.md) | Manual type generation instruction (`pnpm payload generate:types`). | Core / General | User | Critical | Always On | - |
 | [`proposal-roadmap-linking.md`](./proposal-roadmap-linking.md) | Requirement to link all proposals to the master roadmap. | Core / General | User | High | Always On | - |
 

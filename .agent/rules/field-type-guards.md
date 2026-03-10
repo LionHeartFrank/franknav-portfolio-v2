@@ -1,7 +1,7 @@
 ---
-title: Field Type Guards
+trigger: glob
 description: Runtime field type checking and safe type narrowing
-tags: [payload, typescript, type-guards, fields]
+globs: src/collections/**/*.ts, src/globals/**/*.ts, src/fields/**/*.ts
 ---
 
 # Payload Field Type Guards

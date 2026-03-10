@@ -1,7 +1,7 @@
 ---
-title: Fields
+trigger: glob
 description: Field types, patterns, and configurations
-tags: [payload, fields, validation, conditional]
+globs: src/collections/**/*.ts, src/globals/**/*.ts, src/fields/**/*.ts
 ---
 
 # Payload CMS Fields

@@ -1,7 +1,6 @@
 ---
-title: Queries
+trigger: model_decision
 description: Local API, REST, and GraphQL query patterns
-tags: [payload, queries, local-api, rest, graphql]
 ---
 
 # Payload CMS Queries

@@ -1,7 +1,7 @@
 ---
-title: Hooks
+trigger: glob
 description: Collection hooks, field hooks, and context patterns
-tags: [payload, hooks, lifecycle, context]
+globs: src/collections/**/*.ts, src/globals/**/*.ts, src/hooks/**/*.ts
 ---
 
 # Payload CMS Hooks

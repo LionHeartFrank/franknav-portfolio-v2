@@ -1,7 +1,6 @@
 ---
-title: Custom Endpoints
+trigger: model_decision
 description: Custom REST API endpoints with authentication and helpers
-tags: [payload, endpoints, api, routes, webhooks]
 ---
 
 # Payload Custom Endpoints

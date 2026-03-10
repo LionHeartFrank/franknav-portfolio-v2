@@ -1,7 +1,7 @@
 ---
-title: Access Control
+trigger: glob
 description: Collection, field, and global access control patterns
-tags: [payload, access-control, security, permissions, rbac]
+globs: src/collections/**/*.ts, src/globals/**/*.ts, src/access/**/*.ts
 ---
 
 # Payload CMS Access Control

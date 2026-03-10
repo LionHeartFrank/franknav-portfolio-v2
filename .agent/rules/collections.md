@@ -1,7 +1,7 @@
 ---
-title: Collections
+trigger: glob
 description: Collection configurations and patterns
-tags: [payload, collections, auth, upload, drafts]
+globs: src/collections/**/*.ts, src/globals/**/*.ts
 ---
 
 # Payload CMS Collections
