@@ -31,6 +31,7 @@ Rules are guidelines that the AI agent follows autonomously based on specific tr
 | [`queries.md`](./queries.md) | Data fetching best practices. | Backend / API | Payload | High | Model Decision | - |
 | [`generate-types.md`](./generate-types.md) | Manual type generation instruction (`pnpm payload generate:types`). | Core / General | User | Critical | Always On | - |
 | [`proposal-roadmap-linking.md`](./proposal-roadmap-linking.md) | Requirement to link all proposals to the master roadmap. | Core / General | User | High | Always On | - |
+| [`agent-rule-creation.md`](./agent-rule-creation.md) | SOP for the AI Agent when creating and registering new rules. | Agent Config | Agent | Critical | Always On | - |
 
 ## Workflows (`.agent/workflows/`)
 Workflows are step-by-step Standard Operating Procedures (SOPs) that the agent can execute on command using the `/` slash command.
