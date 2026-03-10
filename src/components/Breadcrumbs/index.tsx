@@ -31,7 +31,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
           if (!label) return null
 
           return (
-            <li key={index} className="flex items-center">
+            <li key={item.id ?? index} className="flex items-center">
               {!isLast && url ? (
                 <>
                   <Link

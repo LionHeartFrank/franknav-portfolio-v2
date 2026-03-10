@@ -47,9 +47,7 @@ export const seed = async ({
   await Promise.all(
     globals.map((global) => {
       const data: Record<string, unknown> = {}
-      if (global !== 'settings') {
-        data.navItems = []
-      }
+      data.navItems = []
       return payload.updateGlobal({
         slug: global,
         data,
