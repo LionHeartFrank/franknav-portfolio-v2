@@ -1,4 +1,4 @@
-import { PayloadRequest, CollectionSlug } from 'payload'
+import { CollectionSlug } from 'payload'
 
 const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = {
   posts: '/posts',
@@ -8,9 +8,20 @@ const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = {
 type Props = {
   collection: keyof typeof collectionPrefixMap
   slug: string
-  req: PayloadRequest
   breadcrumbUrl?: string | null
 }
+
+const encodeBreadcrumbUrl = (url: string): string =>
+  url
+    .split('/')
+    .map((segment) => {
+      try {
+        return encodeURIComponent(decodeURIComponent(segment))
+      } catch {
+        return encodeURIComponent(segment)
+      }
+    })
+    .join('/')
 
 export const generatePreviewPath = ({ collection, slug, breadcrumbUrl }: Props) => {
   // Allow empty strings, e.g. for the homepage
@@ -22,7 +33,10 @@ export const generatePreviewPath = ({ collection, slug, breadcrumbUrl }: Props) 
   const encodedSlug = encodeURIComponent(slug)
 
   // Use breadcrumbUrl if provided (for nested docs), otherwise use slug
-  const path = breadcrumbUrl || `${collectionPrefixMap[collection]}/${encodedSlug}`
+  // Encode the breadcrumbUrl path segments to handle special characters
+  const path = breadcrumbUrl
+    ? encodeBreadcrumbUrl(breadcrumbUrl)
+    : `${collectionPrefixMap[collection]}/${encodedSlug}`
 
   const encodedParams = new URLSearchParams({
     slug: encodedSlug,
