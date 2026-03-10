@@ -15,6 +15,11 @@ export const Header: GlobalConfig = {
       blocks: [
         {
           slug: 'link',
+          admin: {
+            custom: {
+              RowLabel: '@/Header/RowLabel#RowLabel',
+            },
+          },
           fields: [
             link({
               appearances: false,
@@ -23,6 +28,11 @@ export const Header: GlobalConfig = {
         },
         {
           slug: 'menuGroup',
+          admin: {
+            custom: {
+              RowLabel: '@/Header/RowLabel#RowLabel',
+            },
+          },
           fields: [
             {
               name: 'label',
@@ -56,9 +66,6 @@ export const Header: GlobalConfig = {
       maxRows: 6,
       admin: {
         initCollapsed: true,
-        components: {
-          RowLabel: '@/Header/RowLabel#RowLabel',
-        },
       },
     },
   ],
