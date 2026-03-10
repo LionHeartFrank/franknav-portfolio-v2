@@ -20,6 +20,16 @@ const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
   const url = getServerSideURL()
 
+  // For pages with breadcrumbs (nested docs), use the last breadcrumb's URL to
+  // correctly generate canonical/OG URLs for nested pages (e.g. /parent/child)
+  // instead of only using the bare slug.
+  if ('breadcrumbs' in doc && Array.isArray(doc.breadcrumbs) && doc.breadcrumbs.length > 0) {
+    const lastBreadcrumb = doc.breadcrumbs.at(-1)
+    if (lastBreadcrumb?.url) {
+      return `${url}${lastBreadcrumb.url}`
+    }
+  }
+
   return doc?.slug ? `${url}/${doc.slug}` : url
 }
 
