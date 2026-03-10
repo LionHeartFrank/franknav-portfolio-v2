@@ -7,26 +7,16 @@ import type { Page, Post } from '@/payload-types'
 
 type CMSLinkType = {
   appearance?: 'inline' | ButtonProps['variant']
-  children?: React.ReactNode
-  className?: string
   label?: string | null
   newTab?: boolean | null
-  onBlur?: React.FocusEventHandler<HTMLAnchorElement>
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>
-  onFocus?: React.FocusEventHandler<HTMLAnchorElement>
-  onKeyDown?: React.KeyboardEventHandler<HTMLAnchorElement>
-  onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement>
-  onMouseLeave?: React.MouseEventHandler<HTMLAnchorElement>
   reference?: {
     relationTo: 'pages' | 'posts'
     value: Page | Post | string | number
   } | null
-  role?: string
   size?: ButtonProps['size'] | null
-  tabIndex?: number
   type?: 'custom' | 'reference' | null
   url?: string | null
-}
+} & Omit<React.ComponentPropsWithoutRef<typeof Link>, 'href'>
 
 export const CMSLink: React.FC<CMSLinkType> = (props) => {
   const {
@@ -39,6 +29,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     reference,
     size: sizeFromProps,
     url,
+    ...rest
   } = props
 
   // For nested pages, use the breadcrumb URL if available
@@ -70,14 +61,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
         className={cn(className)}
         href={href || url || ''}
         {...newTabProps}
-        onBlur={props.onBlur}
-        onClick={props.onClick}
-        onFocus={props.onFocus}
-        onKeyDown={props.onKeyDown}
-        onMouseEnter={props.onMouseEnter}
-        onMouseLeave={props.onMouseLeave}
-        role={props.role}
-        tabIndex={props.tabIndex}
+        {...rest}
       >
         {label && label}
         {children && children}
@@ -91,14 +75,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
         className={cn(className)}
         href={href || url || ''}
         {...newTabProps}
-        onBlur={props.onBlur}
-        onClick={props.onClick}
-        onFocus={props.onFocus}
-        onKeyDown={props.onKeyDown}
-        onMouseEnter={props.onMouseEnter}
-        onMouseLeave={props.onMouseLeave}
-        role={props.role}
-        tabIndex={props.tabIndex}
+        {...rest}
       >
         {label && label}
         {children && children}
