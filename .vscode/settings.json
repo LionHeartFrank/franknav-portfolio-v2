@@ -36,5 +36,8 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": "explicit"
     }
-  }
+  },
+  "files.autoSave": "onWindowChange",
+  "git.supportCancellation": true,
+  "vscode-anchor.solanaBinPath": ""
 }

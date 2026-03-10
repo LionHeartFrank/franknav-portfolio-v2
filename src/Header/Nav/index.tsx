@@ -50,10 +50,12 @@ const MenuGroup: React.FC<{
 
   const handleButtonKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      setIsOpen(!isOpen)
-      if (!isOpen) {
-        setFocusedIndex(0)
+      if (e.key === ' ' || !hasParentLink) {
+        e.preventDefault()
+        setIsOpen(!isOpen)
+        if (!isOpen) {
+          setFocusedIndex(0)
+        }
       }
     } else if (e.key === 'Escape') {
       setIsOpen(false)
@@ -101,39 +103,67 @@ const MenuGroup: React.FC<{
     }
   }, [focusedIndex, isOpen])
 
-  if (hasParentLink) {
-    return (
-      <CMSLink
-        {...item.parentLink}
-        appearance="link"
-        className="flex items-center gap-1 text-sm font-medium"
-      >
-        {item.label}
-      </CMSLink>
-    )
-  }
+  const hasLinks = links.length > 0
 
   return (
-    <div className="relative">
-      <button
-        ref={buttonRef}
-        className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary"
-        onClick={() => setIsOpen(!isOpen)}
-        onKeyDown={handleButtonKeyDown}
-        onBlur={(e) => {
-          // Only close if focus is moving outside the menu group
-          if (!menuRef.current?.contains(e.relatedTarget as Node)) {
-            setIsOpen(false)
-            setFocusedIndex(-1)
+    <div
+      className="relative"
+      onMouseEnter={() => hasLinks && setIsOpen(true)}
+      onMouseLeave={() => {
+        setIsOpen(false)
+        setFocusedIndex(-1)
+      }}
+    >
+      {hasParentLink ? (
+        <CMSLink
+          {...item.parentLink}
+          appearance="link"
+          className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary"
+          onKeyDown={hasLinks ? handleButtonKeyDown : undefined}
+          onMouseEnter={hasLinks ? () => setIsOpen(true) : undefined}
+          onBlur={
+            hasLinks
+              ? (e) => {
+                  // Only close if focus is moving outside the menu group
+                  if (!menuRef.current?.contains(e.relatedTarget as Node)) {
+                    setIsOpen(false)
+                    setFocusedIndex(-1)
+                  }
+                }
+              : undefined
           }
-        }}
-        aria-expanded={isOpen}
-        aria-haspopup="true"
-        aria-controls={`menu-${index}`}
-      >
-        {item.label}
-      </button>
-      {isOpen && (
+          aria-expanded={hasLinks ? isOpen : undefined}
+          aria-haspopup={hasLinks ? 'true' : undefined}
+          aria-controls={hasLinks ? `menu-${index}` : undefined}
+        >
+          {item.label}
+        </CMSLink>
+      ) : (
+        <button
+          ref={buttonRef}
+          className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary"
+          onClick={() => hasLinks && setIsOpen(!isOpen)}
+          onMouseEnter={hasLinks ? () => setIsOpen(true) : undefined}
+          onKeyDown={hasLinks ? handleButtonKeyDown : undefined}
+          onBlur={
+            hasLinks
+              ? (e) => {
+                  // Only close if focus is moving outside the menu group
+                  if (!menuRef.current?.contains(e.relatedTarget as Node)) {
+                    setIsOpen(false)
+                    setFocusedIndex(-1)
+                  }
+                }
+              : undefined
+          }
+          aria-expanded={hasLinks ? isOpen : undefined}
+          aria-haspopup={hasLinks ? 'true' : undefined}
+          aria-controls={hasLinks ? `menu-${index}` : undefined}
+        >
+          {item.label}
+        </button>
+      )}
+      {hasLinks && isOpen && (
         <div
           ref={menuRef}
           id={`menu-${index}`}
@@ -142,38 +172,21 @@ const MenuGroup: React.FC<{
           onKeyDown={handleMenuKeyDown}
         >
           <ul className="flex flex-col gap-2">
-            {links.map((linkItem, j) => {
-              // Calculate href for the menu item
-              const linkData = linkItem.link
-              let href = linkData.url || ''
-              
-              if (linkData.type === 'reference' && typeof linkData.reference?.value === 'object') {
-                const doc = linkData.reference.value
-                if (linkData.reference.relationTo === 'pages' && 'breadcrumbs' in doc && doc.breadcrumbs) {
-                  const breadcrumbs = doc.breadcrumbs as Array<{ url?: string | null }>
-                  const breadcrumbUrl = breadcrumbs[breadcrumbs.length - 1]?.url
-                  href = breadcrumbUrl || ('slug' in doc ? `/${doc.slug}` : '')
-                } else if ('slug' in doc && doc.slug) {
-                  href = `${linkData.reference.relationTo !== 'pages' ? `/${linkData.reference.relationTo}` : ''}/${doc.slug}`
-                }
-              }
-
-              const newTabProps = linkData.newTab ? { rel: 'noopener noreferrer', target: '_blank' } : {}
-
-              return (
-                <li key={j} role="none">
-                  <Link
-                    href={href}
-                    className="whitespace-nowrap text-sm font-medium hover:underline block"
-                    role="menuitem"
-                    tabIndex={focusedIndex === j ? 0 : -1}
-                    {...newTabProps}
-                  >
-                    {linkData.label}
-                  </Link>
-                </li>
-              )
-            })}
+            {links.map((linkItem, j) => (
+              <li key={j} role="none">
+                <CMSLink
+                  {...linkItem.link}
+                  appearance="inline"
+                  className="whitespace-nowrap text-sm font-medium hover:underline block"
+                  onClick={() => {
+                    setIsOpen(false)
+                    setFocusedIndex(-1)
+                  }}
+                  role="menuitem"
+                  tabIndex={focusedIndex === j ? 0 : -1}
+                />
+              </li>
+            ))}
           </ul>
         </div>
       )}
