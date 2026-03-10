@@ -28,7 +28,7 @@ type CMSLinkType = {
   url?: string | null
 }
 
-export const CMSLink: React.FC<CMSLinkType> = (props) => {
+export const CMSLink = React.forwardRef<HTMLAnchorElement, CMSLinkType>((props, ref) => {
   const {
     type,
     appearance = 'inline',
@@ -67,6 +67,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   if (appearance === 'inline') {
     return (
       <Link
+        ref={ref}
         className={cn(className)}
         href={href || url || ''}
         {...newTabProps}
@@ -88,6 +89,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   return (
     <Button asChild className={className} size={size} variant={appearance}>
       <Link
+        ref={ref}
         className={cn(className)}
         href={href || url || ''}
         {...newTabProps}
@@ -105,4 +107,6 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
       </Link>
     </Button>
   )
-}
+})
+
+CMSLink.displayName = 'CMSLink'

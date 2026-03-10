@@ -20,6 +20,7 @@ const MenuGroup: React.FC<{
   const [isOpen, setIsOpen] = useState(false)
   const [focusedIndex, setFocusedIndex] = useState(-1)
   const buttonRef = useRef<HTMLButtonElement>(null)
+  const parentLinkRef = useRef<HTMLAnchorElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
 
   const hasParentLink =
@@ -31,11 +32,12 @@ const MenuGroup: React.FC<{
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      const triggerRef = hasParentLink ? parentLinkRef : buttonRef
       if (
         menuRef.current &&
         !menuRef.current.contains(event.target as Node) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(event.target as Node)
+        triggerRef.current &&
+        !triggerRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false)
         setFocusedIndex(-1)
@@ -60,7 +62,11 @@ const MenuGroup: React.FC<{
     } else if (e.key === 'Escape') {
       setIsOpen(false)
       setFocusedIndex(-1)
-      buttonRef.current?.focus()
+      if (hasParentLink) {
+        parentLinkRef.current?.focus()
+      } else {
+        buttonRef.current?.focus()
+      }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault()
       if (!isOpen) {
@@ -82,7 +88,11 @@ const MenuGroup: React.FC<{
       e.preventDefault()
       setIsOpen(false)
       setFocusedIndex(-1)
-      buttonRef.current?.focus()
+      if (hasParentLink) {
+        parentLinkRef.current?.focus()
+      } else {
+        buttonRef.current?.focus()
+      }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault()
       setFocusedIndex((prev) => (prev + 1) % links.length)
@@ -116,6 +126,7 @@ const MenuGroup: React.FC<{
     >
       {hasParentLink ? (
         <CMSLink
+          ref={parentLinkRef}
           {...item.parentLink}
           appearance="link"
           className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary"
