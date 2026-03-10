@@ -36,6 +36,16 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
 - [x] Establish Atomic Git Workflow (.agent/workflows/git.md)
 - [x] Establish Local-First Migration practice (Execute `payload migrate` locally before push)
 - [x] Configure Email Adapter (`@payloadcms/email-nodemailer`)
+
+- [ ] Create Workspace level rules for Agent to follow to ensure brand consistency and accessibility
+  - [ ] Ensure all components are accessible and follow WCAG 2+ AAA standards
+  - [ ] Ensure all components are responsive and follow mobile-first design principle
+- [ ] Ensure all components are performant and follow best practices
+- [ ] Ensure colors are WCAG 2+ AAA standards and Advanced Perceptual Contrast Algorithm (APCA).
+- [ ] Develop core UI component library
+- [ ] Apply brand styling to global Header/Footer layouts
+
+
 - [ ] Configure Vercel deployment pipeline
 - [ ] Connect custom domain `franknav.com`
 
@@ -61,13 +71,7 @@ Use this checklist to track the project's progress. Items marked with `[x]` are 
   - [ ] Audit and integrate `next-sitemap` components
   - [ ] Audit and integrate `next-og-image` components
 
-- [ ] Create Workspace level rules for Agent to follow to ensure brand consistency and accessibility
-  - [ ] Ensure all components are accessible and follow WCAG 2+ AAA standards
-  - [ ] Ensure all components are responsive and follow mobile-first design principle
-- [ ] Ensure all components are performant and follow best practices
-- [ ] Ensure colors are WCAG 2+ AAA standards and Advanced Perceptual Contrast Algorithm (APCA).
-- [ ] Develop core UI component library
-- [ ] Apply brand styling to global Header/Footer layouts
+
 
 ## Phase 4: Development & Features
 
