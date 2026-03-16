@@ -20,6 +20,7 @@ const MenuGroup: React.FC<{
   const [isOpen, setIsOpen] = useState(false)
   const [focusedIndex, setFocusedIndex] = useState(-1)
   const buttonRef = useRef<HTMLButtonElement>(null)
+  const triggerRef = useRef<HTMLSpanElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
 
   const hasParentLink =
@@ -34,8 +35,8 @@ const MenuGroup: React.FC<{
       if (
         menuRef.current &&
         !menuRef.current.contains(event.target as Node) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(event.target as Node)
+        triggerRef.current &&
+        !triggerRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false)
         setFocusedIndex(-1)
@@ -115,53 +116,57 @@ const MenuGroup: React.FC<{
       }}
     >
       {hasParentLink ? (
-        <CMSLink
-          {...item.parentLink}
-          appearance="link"
-          className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary"
-          onKeyDown={hasLinks ? handleButtonKeyDown : undefined}
-          onMouseEnter={hasLinks ? () => setIsOpen(true) : undefined}
-          onBlur={
-            hasLinks
-              ? (e) => {
-                  // Only close if focus is moving outside the menu group
-                  if (!menuRef.current?.contains(e.relatedTarget as Node)) {
-                    setIsOpen(false)
-                    setFocusedIndex(-1)
+        <span ref={triggerRef}>
+          <CMSLink
+            {...item.parentLink}
+            appearance="link"
+            className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary"
+            onKeyDown={hasLinks ? handleButtonKeyDown : undefined}
+            onMouseEnter={hasLinks ? () => setIsOpen(true) : undefined}
+            onBlur={
+              hasLinks
+                ? (e) => {
+                    // Only close if focus is moving outside the menu group
+                    if (!menuRef.current?.contains(e.relatedTarget as Node)) {
+                      setIsOpen(false)
+                      setFocusedIndex(-1)
+                    }
                   }
-                }
-              : undefined
-          }
-          aria-expanded={hasLinks ? isOpen : undefined}
-          aria-haspopup={hasLinks ? 'true' : undefined}
-          aria-controls={hasLinks ? `menu-${index}` : undefined}
-        >
-          {item.label}
-        </CMSLink>
+                : undefined
+            }
+            aria-expanded={hasLinks ? isOpen : undefined}
+            aria-haspopup={hasLinks ? 'true' : undefined}
+            aria-controls={hasLinks ? `menu-${index}` : undefined}
+          >
+            {item.label}
+          </CMSLink>
+        </span>
       ) : (
-        <button
-          ref={buttonRef}
-          className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary"
-          onClick={() => hasLinks && setIsOpen(!isOpen)}
-          onMouseEnter={hasLinks ? () => setIsOpen(true) : undefined}
-          onKeyDown={hasLinks ? handleButtonKeyDown : undefined}
-          onBlur={
-            hasLinks
-              ? (e) => {
-                  // Only close if focus is moving outside the menu group
-                  if (!menuRef.current?.contains(e.relatedTarget as Node)) {
-                    setIsOpen(false)
-                    setFocusedIndex(-1)
+        <span ref={triggerRef}>
+          <button
+            ref={buttonRef}
+            className="flex items-center gap-1 text-sm font-medium text-primary hover:text-primary"
+            onClick={() => hasLinks && setIsOpen(!isOpen)}
+            onMouseEnter={hasLinks ? () => setIsOpen(true) : undefined}
+            onKeyDown={hasLinks ? handleButtonKeyDown : undefined}
+            onBlur={
+              hasLinks
+                ? (e) => {
+                    // Only close if focus is moving outside the menu group
+                    if (!menuRef.current?.contains(e.relatedTarget as Node)) {
+                      setIsOpen(false)
+                      setFocusedIndex(-1)
+                    }
                   }
-                }
-              : undefined
-          }
-          aria-expanded={hasLinks ? isOpen : undefined}
-          aria-haspopup={hasLinks ? 'true' : undefined}
-          aria-controls={hasLinks ? `menu-${index}` : undefined}
-        >
-          {item.label}
-        </button>
+                : undefined
+            }
+            aria-expanded={hasLinks ? isOpen : undefined}
+            aria-haspopup={hasLinks ? 'true' : undefined}
+            aria-controls={hasLinks ? `menu-${index}` : undefined}
+          >
+            {item.label}
+          </button>
+        </span>
       )}
       {hasLinks && isOpen && (
         <div
